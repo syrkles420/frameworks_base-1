@@ -4574,6 +4574,7 @@ public final class Settings {
          * 4 - force shishudreams
          * 5 - force shishunights
          * 6 - force shishuillusion
+         * 7 - force shishuinmensity
          * @hide
          */
         public static final String SYSTEM_THEME_STYLE = "system_theme_style";
