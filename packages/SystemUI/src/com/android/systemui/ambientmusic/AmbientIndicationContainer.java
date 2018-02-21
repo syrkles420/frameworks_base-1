@@ -140,4 +140,31 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
             mStatusBar.triggerAmbientForMedia();
         }
     }
+
+    public void setIndicationTagged(String tagTitle, String tagArtist ) {
+        Resources res = getResources();
+        CharSequence charSequence = null;
+            CharSequence artist = tagArtist;
+            CharSequence title = tagTitle;
+            if (artist != null && title != null) {
+                /* considering we are in Ambient mode here, it's not worth it to show
+                    too many infos, so let's skip album name to keep a smaller text */
+                charSequence = String.format(res.getString(R.string.ambientmusic_songinfo), title.toString(), artist.toString());
+            }
+        if (mScrollingInfo) {
+            // if we are already showing an Ambient Notification with track info,
+            // stop the current scrolling and start it delayed again for the next song
+            setTickerMarquee(true);
+        }
+        mText.setText(charSequence);
+        boolean infoAvaillable = TextUtils.isEmpty(charSequence);
+        if (infoAvaillable) {
+            mAmbientIndication.setVisibility(View.INVISIBLE);
+        } else {
+            mAmbientIndication.setVisibility(View.VISIBLE);
+        }
+        if (mStatusBar != null) {
+            mStatusBar.triggerAmbientForMedia();
+        }
+    }
 }

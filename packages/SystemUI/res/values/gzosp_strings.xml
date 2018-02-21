@@ -128,4 +128,9 @@
     <!-- Bootleg Dumpster Tile -->
     <string name="quick_settings_bootlegdump_label">The Dumpster</string>
     <string name="quick_settings_bootlegdump_toast">Wew, for some reason it\'s dead, it\'s broken, it\'s not working.</string>
+
+    <!-- The name of the recognition notification channel. -->
+    <string name="ambient_play_recognition_channel">Recognized Music Notifications</string>
+    <!-- The contents of the recognition notification. -->
+    <string name="ambient_play_notification_title">Now Playing</string>
 </resources>
