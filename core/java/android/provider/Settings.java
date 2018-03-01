@@ -5075,6 +5075,15 @@ public final class Settings {
          */
         public static final String WALLPAPER_KEYGUARD_WALLPAPER_TINT = "wallpaper_keyguard_wallpaper_tint";
 
+        /**
+         * Whether to show the kill app button in notification guts
+         *
+         * @hide
+         */
+        public static final String NOTIFICATION_GUTS_KILL_APP_BUTTON =
+                "notification_guts_kill_app_button";
+
+
         /** End of ABC system settings**/
 
         /**
