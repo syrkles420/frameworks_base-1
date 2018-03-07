@@ -79,4 +79,7 @@
     <!-- Whether device has turbo power charging support -->
     <java-symbol type="bool" name="config_hasTurboPowerCharger" />
 
+  <!-- Forcefully tint notification icon text -->
+  <java-symbol type="bool" name="config_useDarkBgNotificationIconTextTinting" />
+
 </resources>
