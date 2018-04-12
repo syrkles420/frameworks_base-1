@@ -68,4 +68,12 @@
    <!-- Ambient clock padding workaround -->
   <dimen name="ambient_clock_forced_top_padding">10dp</dimen>
   <dimen name="ambient_clock_forced_bottom_padding">0dp</dimen>
+
+   <!-- Rounded exposures for all the stuff -->
+   <dimen name="brightness_rounded_corner_radius">@dimen/p_round_overall_corner_radius</dimen>
+   <dimen name="notifications_shape_corner_radius">1dp</dimen>
+   <dimen name="quick_settings_corner_radius">@dimen/p_round_overall_corner_radius</dimen>
+   <dimen name="volume_panel_corner_radius">@dimen/p_round_overall_corner_radius</dimen>
+   <dimen name="p_round_overall_corner_radius">0dp</dimen>
+
 </resources>
