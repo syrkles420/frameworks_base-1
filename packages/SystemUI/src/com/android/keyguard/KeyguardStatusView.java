@@ -1000,7 +1000,7 @@ public class KeyguardStatusView extends GridLayout implements
 
         // Testing this kek
 		MarginLayoutParams containerParams = (MarginLayoutParams) mClockContainer.getLayoutParams();
-        int specialTopPadding = dark ? 90 : 0;
+        int specialTopPadding = dark ? 60 : 0;
         containerParams.setMargins(0, specialTopPadding, 0, 0);
         mClockContainer.setLayoutParams(containerParams);
         updateDozeVisibleViews();
