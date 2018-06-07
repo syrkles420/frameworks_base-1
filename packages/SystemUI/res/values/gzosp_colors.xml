@@ -51,7 +51,7 @@
     <color name="quick_settings_theme_tile_whythisgrey">#91919b</color>
 
     <!-- Power menu wallpaper tint off color -->
-    <color name="power_menu_wallpaper_tint_off_color">#80202020</color>
+    <color name="power_menu_wallpaper_tint_off_color">#e6000000</color>
 
 </resources>
 
