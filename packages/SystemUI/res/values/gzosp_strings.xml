@@ -227,7 +227,7 @@
     <!--Roaming icon switch -->
     <string name="status_bar_roaming">Roaming</string>
 
-    <-- VPN icon switch -->
+    <!-- VPN icon switch -->
     <string name="status_bar_vpn">VPN</string>
 
     <!-- Kill button in notification guts -->
