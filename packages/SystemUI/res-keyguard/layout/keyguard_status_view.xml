@@ -46,7 +46,7 @@
                 android:textColor="?attr/wallpaperTextColor"
                 style="@style/widget_big_thin"
                 android:gravity="center"
-                android:layout_marginBottom="0dp" />
+                android:layout_marginBottom="@dimen/bottom_text_spacing_digital" />
             <CustomAnalogClock
                 android:id="@+id/analog_clock_view"
                 android:layout_width="wrap_content"

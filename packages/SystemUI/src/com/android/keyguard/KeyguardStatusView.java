@@ -241,10 +241,10 @@ public class KeyguardStatusView extends GridLayout implements
         // ClockView
         //mClockView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
         //        getResources().getDimensionPixelSize(R.dimen.widget_big_font_size));
-        //MarginLayoutParams layoutParams = (MarginLayoutParams) mClockView.getLayoutParams();
-        //layoutParams.bottomMargin = getResources().getDimensionPixelSize(
-        //        R.dimen.bottom_text_spacing_digital);
-        //mClockView.setLayoutParams(layoutParams);
+        MarginLayoutParams layoutParams = (MarginLayoutParams) mClockView.getLayoutParams();
+        layoutParams.bottomMargin = getResources().getDimensionPixelSize(
+                R.dimen.bottom_text_spacing_digital);
+        mClockView.setLayoutParams(layoutParams);
         //mClockView.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
         mDateView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimensionPixelSize(R.dimen.widget_label_font_size));
