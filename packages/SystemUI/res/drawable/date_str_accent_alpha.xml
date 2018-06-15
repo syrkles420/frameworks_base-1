@@ -1,0 +1,3 @@
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+        android:src="@drawable/date_str_accent"
+    android:alpha="0.75"/>

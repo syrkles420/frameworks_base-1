@@ -593,16 +593,43 @@ public class KeyguardStatusView extends GridLayout implements
                 mDateView.setBackgroundResource(0);
                 mDateView.setTypeface(Typeface.DEFAULT);
                 mDateView.setPadding(0,0,0,0);
+                mDateView.setLetterSpacing(0.05f);
                 break;
             case 1: // semi-transparent box
                 mDateView.setBackground(getResources().getDrawable(R.drawable.date_box_str_border));
                 mDateView.setTypeface(Typeface.DEFAULT_BOLD);
                 mDateView.setPadding(40,20,40,20);
+                mDateView.setLetterSpacing(0.05f);
                 break;
             case 2: // semi-transparent box (round)
                 mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_border));
                 mDateView.setTypeface(Typeface.DEFAULT_BOLD);
                 mDateView.setPadding(40,20,40,20);
+                mDateView.setLetterSpacing(0.05f);
+                break;
+            case 3: // accent box
+                mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_accent));
+                mDateView.setTypeface(Typeface.DEFAULT);
+                mDateView.setPadding(30,15,30,15);
+                mDateView.setLetterSpacing(0.15f);
+                break;
+            case 4: // accent box but just the day
+                mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_accent));
+                mDateView.setTypeface(Typeface.DEFAULT);
+                mDateView.setPadding(30,15,30,15);
+                mDateView.setLetterSpacing(0.15f);
+                break;
+            case 5: // accent box transparent
+                mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_accent_alpha));
+                mDateView.setTypeface(Typeface.DEFAULT);
+                mDateView.setPadding(30,15,30,15);
+                mDateView.setLetterSpacing(0.15f);
+                break;
+            case 6: // accent box transparent but just the day
+                mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_accent_alpha));
+                mDateView.setTypeface(Typeface.DEFAULT);
+                mDateView.setPadding(30,15,30,15);
+                mDateView.setLetterSpacing(0.15f);
                 break;
         }
         updateVisibilities();
@@ -962,14 +989,25 @@ public class KeyguardStatusView extends GridLayout implements
         static String clockView12;
         static String clockView24;
         static String cacheKey;
+        static int mDateSelectionStatic;
 
         static void update(Context context, boolean hasAlarm) {
             final Locale locale = Locale.getDefault();
             final Resources res = context.getResources();
 
+            if (mDateSelectionStatic == 3 || mDateSelectionStatic == 5) {
+            dateViewSkel = res.getString(hasAlarm
+                    ? R.string.abbrev_wday_month_day_no_year_alarm
+                    : R.string.abbrev_wday_day_no_year);
+            } else if (mDateSelectionStatic == 4 || mDateSelectionStatic == 6) {
+            dateViewSkel = res.getString(hasAlarm
+                    ? R.string.abbrev_wday_month_day_no_year_alarm
+                    : R.string.abbrev_wday_no_year);
+            } else {
             dateViewSkel = res.getString(hasAlarm
                     ? R.string.abbrev_wday_month_day_no_year_alarm
                     : R.string.abbrev_wday_month_day_no_year);
+            }
             final String clockView12Skel = res.getString(R.string.clock_12hr_format);
             final String clockView24Skel = res.getString(R.string.clock_24hr_format);
             final String key = locale.toString() + dateViewSkel + clockView12Skel + clockView24Skel;
