@@ -293,7 +293,7 @@ public class KeyguardStatusView extends GridLayout implements
         int red = Math.round((intColor >> 16) & 0xFF);
         int green = Math.round((intColor >> 8) & 0xFF);
         int blue = Math.round((intColor) & 0xFF);
-        String timeMuted = Integer.toHexString(Color.argb(192, red, green, blue));
+        String timeMuted = Integer.toHexString(Color.argb(140, red, green, blue));
 
         if (mClockSelection == 0) {
             mClockView.setFormat12Hour(Patterns.clockView12);
@@ -594,42 +594,51 @@ public class KeyguardStatusView extends GridLayout implements
                 mDateView.setTypeface(Typeface.DEFAULT);
                 mDateView.setPadding(0,0,0,0);
                 mDateView.setLetterSpacing(0.05f);
+                mDateView.setAllCaps(false);
                 break;
             case 1: // semi-transparent box
                 mDateView.setBackground(getResources().getDrawable(R.drawable.date_box_str_border));
                 mDateView.setTypeface(Typeface.DEFAULT_BOLD);
                 mDateView.setPadding(40,20,40,20);
                 mDateView.setLetterSpacing(0.05f);
+                mDateView.setAllCaps(false);
                 break;
             case 2: // semi-transparent box (round)
                 mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_border));
                 mDateView.setTypeface(Typeface.DEFAULT_BOLD);
                 mDateView.setPadding(40,20,40,20);
                 mDateView.setLetterSpacing(0.05f);
+                mDateView.setAllCaps(false);
                 break;
             case 3: // accent box
                 mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_accent));
                 mDateView.setTypeface(Typeface.DEFAULT);
-                mDateView.setPadding(30,15,30,15);
+                mDateView.setPadding(30,10,30,10);
                 mDateView.setLetterSpacing(0.15f);
+                mDateView.setAllCaps(true);
                 break;
             case 4: // accent box but just the day
                 mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_accent));
                 mDateView.setTypeface(Typeface.DEFAULT);
-                mDateView.setPadding(30,15,30,15);
+                mDateView.setPadding(30,10,30,10);
                 mDateView.setLetterSpacing(0.15f);
+                mDateView.setAllCaps(true);
                 break;
             case 5: // accent box transparent
-                mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_accent_alpha));
+                mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_accent));
                 mDateView.setTypeface(Typeface.DEFAULT);
-                mDateView.setPadding(30,15,30,15);
+                mDateView.getBackground().setAlpha(160);
+                mDateView.setPadding(30,10,30,10);
                 mDateView.setLetterSpacing(0.15f);
+                mDateView.setAllCaps(true);
                 break;
             case 6: // accent box transparent but just the day
-                mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_accent_alpha));
+                mDateView.setBackground(getResources().getDrawable(R.drawable.date_str_accent));
                 mDateView.setTypeface(Typeface.DEFAULT);
-                mDateView.setPadding(30,15,30,15);
+                mDateView.getBackground().setAlpha(160);
+                mDateView.setPadding(30,10,30,10);
                 mDateView.setLetterSpacing(0.15f);
+                mDateView.setAllCaps(true);
                 break;
         }
         updateVisibilities();
@@ -989,11 +998,12 @@ public class KeyguardStatusView extends GridLayout implements
         static String clockView12;
         static String clockView24;
         static String cacheKey;
-        static int mDateSelectionStatic;
 
         static void update(Context context, boolean hasAlarm) {
             final Locale locale = Locale.getDefault();
             final Resources res = context.getResources();
+            final int mDateSelectionStatic = Settings.System.getIntForUser(context.getContentResolver(),
+                Settings.System.LOCKSCREEN_DATE_SELECTION, 0, UserHandle.USER_CURRENT);
 
             if (mDateSelectionStatic == 3 || mDateSelectionStatic == 5) {
             dateViewSkel = res.getString(hasAlarm
