@@ -543,7 +543,7 @@ public class KeyguardStatusView extends GridLayout implements
                 getResources().getDimensionPixelSize(R.dimen.widget_sammy_accent_font_size));
                 mClockView.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
                 mClockView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                mClockView.setLineSpacing(-50f,1f);
+                mClockView.setLineSpacing(-55f,1f);
                 mAnalogClockView.setVisibility(View.GONE);
                 mDeadPoolClockView.setVisibility(View.GONE);
                 break;

@@ -16,14 +16,14 @@
 <resources>
 
      <!-- Our custom clock values -->
-     <dimen name="widget_sammy_accent_font_size">65dp</dimen>
+     <dimen name="widget_sammy_accent_font_size">58dp</dimen>
 
     <!-- the size for all the clock sizes -->
     <dimen name="widget_clock_shishu_size">175dp</dimen>
 
      <!-- Our custom clock values -->
-     <dimen name="widget_shishu_accent_font_size">65dp</dimen>
+     <dimen name="widget_shishu_accent_font_size">45dp</dimen>
 
      <!-- Font size for inmensity clock -->
-     <dimen name="widget_shishu_inmensity_font_size">50dp</dimen>
+     <dimen name="widget_shishu_inmensity_font_size">40dp</dimen>
 </resources>
