@@ -3,7 +3,7 @@
     android:shape="rectangle" >
 
     <solid
-        android:color="@color/clock_shishu_accent" />
+        android:color="@color/accent_date_color" />
     <corners
         android:radius="30dp" />
 

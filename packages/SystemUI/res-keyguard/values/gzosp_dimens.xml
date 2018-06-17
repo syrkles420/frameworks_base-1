@@ -16,6 +16,6 @@
 <resources>
 
      <!-- Our custom clock values -->
-     <dimen name="widget_big_font_size">65dp</dimen>
+     <dimen name="widget_sammy_accent_font_size">65dp</dimen>
 
 </resources>
