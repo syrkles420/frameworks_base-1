@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.internal.util.aospextended;
+package com.android.internal.util.crdroid;
 
 import android.content.Context;
 import android.content.res.Resources;
