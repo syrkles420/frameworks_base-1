@@ -308,8 +308,8 @@ public class KeyguardStatusView extends GridLayout implements
             mClockView.setFormat12Hour(Html.fromHtml("hh<br><font color=" + getResources().getColor(R.color.sammy_minutes_accent) + ">mm</font>"));
             mClockView.setFormat24Hour(Html.fromHtml("kk<br><font color=" + getResources().getColor(R.color.sammy_minutes_accent) + ">mm</font>"));
         } else if (mClockSelection == 7) {
-            mClockView.setFormat12Hour(Html.fromHtml("<font color=\"#b9ffffff\">hh</font><br><font color=" + getResources().getColor(R.color.sammy_minutes_accent) + ">mm</font>"));
-            mClockView.setFormat24Hour(Html.fromHtml("<font color=\"#b9ffffff\">kk</font><br><font color=" + getResources().getColor(R.color.sammy_minutes_accent) + ">mm</font>"));
+            mClockView.setFormat12Hour(Html.fromHtml("<font color='#b9b9b9'>hh</font><br><font color=" + getResources().getColor(R.color.sammy_minutes_accent) + ">mm</font>"));
+            mClockView.setFormat24Hour(Html.fromHtml("<font color='#b9b9b9'>kk</font><br><font color=" + getResources().getColor(R.color.sammy_minutes_accent) + ">mm</font>"));
         } else if (mClockSelection == 9) {
             mClockView.setFormat12Hour(Html.fromHtml("hh mm"));
             mClockView.setFormat24Hour(Html.fromHtml("kk mm"));
@@ -543,7 +543,7 @@ public class KeyguardStatusView extends GridLayout implements
                 getResources().getDimensionPixelSize(R.dimen.widget_sammy_accent_font_size));
                 mClockView.getLayoutParams().width = ViewGroup.LayoutParams.WRAP_CONTENT;
                 mClockView.getLayoutParams().height = ViewGroup.LayoutParams.WRAP_CONTENT;
-                mClockView.setLineSpacing(-55f,1f);
+                mClockView.setLineSpacing(-65f,1f);
                 mAnalogClockView.setVisibility(View.GONE);
                 mDeadPoolClockView.setVisibility(View.GONE);
                 break;
