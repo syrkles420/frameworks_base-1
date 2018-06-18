@@ -865,13 +865,6 @@
     <dimen name="floating_action_button_margin_side">32dp</dimen>
     <dimen name="floating_action_button_margin_bottom">46dp</dimen>
 
-   <!-- Rounded exposures for all the stuff -->
-   <dimen name="brightness_rounded_corner_radius">@dimen/p_round_overall_corner_radius</dimen>
-   <dimen name="notifications_shape_corner_radius">1.0dip</dimen>
-   <dimen name="quick_settings_corner_radius">@dimen/p_round_overall_corner_radius</dimen>
-   <dimen name="volume_panel_corner_radius">@dimen/p_round_overall_corner_radius</dimen>
-   <dimen name="p_round_overall_corner_radius">1.0dip</dimen>
-
    <!-- Exposure for the linespacing -->
   <item name="notification_info_letter_spacing" format="float" type="dimen">0.10</item>
 
