@@ -22,10 +22,5 @@
   <dimen name="z_distance_between_notifications">1.0dip</dimen>
   <dimen name="notification_shadow_radius">15.0dip</dimen>
   <dimen name="notification_divider_height">3.5dip</dimen>
-   <!-- Rounded exposures for all the stuff -->
-   <dimen name="brightness_rounded_corner_radius">@dimen/p_round_overall_corner_radius</dimen>
-   <dimen name="notifications_shape_corner_radius">5dp</dimen>
-   <dimen name="quick_settings_corner_radius">@dimen/p_round_overall_corner_radius</dimen>
-   <dimen name="volume_panel_corner_radius">@dimen/p_round_overall_corner_radius</dimen>
-   <dimen name="p_round_overall_corner_radius">8dp</dimen>
+
 </resources>
