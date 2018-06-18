@@ -144,6 +144,8 @@ public class ThemeTile extends QSTileImpl<BooleanState> {
                 R.string.systemui_theme_style_shishunights, Settings.System.SYSTEM_THEME_STYLE));
         sStyleItems.add(new ThemeTileItem(6, -1,
                 R.string.systemui_theme_style_shishuillusion, Settings.System.SYSTEM_THEME_STYLE));
+        sStyleItems.add(new ThemeTileItem(6, -1,
+                R.string.systemui_theme_style_shishuinmensity, Settings.System.SYSTEM_THEME_STYLE));
     }
 
     private enum Mode {
