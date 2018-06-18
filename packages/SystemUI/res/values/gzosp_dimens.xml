@@ -76,4 +76,7 @@
    <dimen name="volume_panel_corner_radius">@dimen/p_round_overall_corner_radius</dimen>
    <dimen name="p_round_overall_corner_radius">0dp</dimen>
 
+   <!-- Exposure for the linespacing -->
+  <item name="notification_info_letter_spacing" format="float" type="dimen">0</item>
+
 </resources>
