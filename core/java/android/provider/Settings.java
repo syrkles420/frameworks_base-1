@@ -9636,6 +9636,13 @@ public final class Settings {
         public static final String AMBIENT_RECOGNITION_KEYGUARD = "ambient_recognition_keyguard";
 
         /**
+         * The update interval in milliseconds that is used by Ambient Play to recognize music 
+         *
+         * @hide
+         */
+        public static final String AMBIENT_RECOGNITION_INTERVAL = "ambient_recognition_interval";
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
