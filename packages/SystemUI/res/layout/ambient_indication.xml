@@ -14,21 +14,12 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<<<<<<< HEAD
 
 <com.android.systemui.ambientmusic.AmbientIndicationContainer
-=======
-<com.android.systemui.ambient.play.AmbientIndicationContainer
-    xmlns:android="http://schemas.android.com/apk/res/android"
->>>>>>> 4319c0d0f43... AmbientPlay: Rework
     android:layout_gravity="bottom"
     android:id="@id/ambient_indication_container"
     android:layout="@layout/ambient_indication_inner"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-<<<<<<< HEAD
     android:forceHasOverlappingRendering="false"
     xmlns:android="http://schemas.android.com/apk/res/android" />
-=======
-    android:forceHasOverlappingRendering="false" />
->>>>>>> 4319c0d0f43... AmbientPlay: Rework

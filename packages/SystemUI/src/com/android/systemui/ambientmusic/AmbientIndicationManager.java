@@ -13,12 +13,9 @@
  * You should have received a copy of the GNU General Public License along with this program;
  * if not, see <http://www.gnu.org/licenses>.
  */
-package com.android.systemui.ambient.play;
+package com.android.systemui.ambientmusic;
 
 import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -48,8 +45,6 @@ public class AmbientIndicationManager {
     private Context mContext;
     private ContentResolver mContentResolver;
     private boolean isRecognitionEnabled;
-    private boolean isRecognitionEnabledOnKeyguard;
-    private boolean isRecognitionNotificationEnabled;
     private RecognitionObserver mRecognitionObserver;
     private String ACTION_UPDATE_AMBIENT_INDICATION = "update_ambient_indication";
     private AlarmManager mAlarmManager;
@@ -200,12 +195,6 @@ public class AmbientIndicationManager {
             mContentResolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.AMBIENT_RECOGNITION),
                     false, this, UserHandle.USER_ALL);
-            mContentResolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.AMBIENT_RECOGNITION_KEYGUARD),
-                    false, this, UserHandle.USER_ALL);
-            mContentResolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.AMBIENT_RECOGNITION_NOTIFICATION),
-                    false, this, UserHandle.USER_ALL);
         }
 
         void unregister() {
@@ -221,20 +210,12 @@ public class AmbientIndicationManager {
                 lastAlarmInterval = 0;
                 dispatchSettingsChanged(Settings.System.AMBIENT_RECOGNITION, isRecognitionEnabled);
                 updateAmbientPlayAlarm(false);
-            } else if (uri.equals(Settings.System.getUriFor(Settings.System.AMBIENT_RECOGNITION_KEYGUARD))) {
-                dispatchSettingsChanged(Settings.System.AMBIENT_RECOGNITION_KEYGUARD, isRecognitionEnabledOnKeyguard);
-            } else if (uri.equals(Settings.System.getUriFor(Settings.System.AMBIENT_RECOGNITION_NOTIFICATION))) {
-                dispatchSettingsChanged(Settings.System.AMBIENT_RECOGNITION_NOTIFICATION, isRecognitionNotificationEnabled);
             }
         }
 
         public void update() {
             isRecognitionEnabled = Settings.System.getIntForUser(mContentResolver,
                     Settings.System.AMBIENT_RECOGNITION, 0, UserHandle.USER_CURRENT) != 0;
-            isRecognitionEnabledOnKeyguard = Settings.System.getIntForUser(mContentResolver,
-                    Settings.System.AMBIENT_RECOGNITION_KEYGUARD, 1, UserHandle.USER_CURRENT) != 0;
-            isRecognitionNotificationEnabled = Settings.System.getIntForUser(mContentResolver,
-                    Settings.System.AMBIENT_RECOGNITION_NOTIFICATION, 1, UserHandle.USER_CURRENT) != 0;
         }
     }
 
@@ -245,17 +226,12 @@ public class AmbientIndicationManager {
     public void registerCallback(AmbientIndicationManagerCallback callback) {
         mCallbacks.add(callback);
         callback.onSettingsChanged(Settings.System.AMBIENT_RECOGNITION, isRecognitionEnabled);
-        callback.onSettingsChanged(Settings.System.AMBIENT_RECOGNITION_KEYGUARD, isRecognitionEnabledOnKeyguard);
-        callback.onSettingsChanged(Settings.System.AMBIENT_RECOGNITION_NOTIFICATION, isRecognitionNotificationEnabled);
     }
 
     public void dispatchRecognitionResult(RecognitionObserver.Observable observed) {
         isRecognitionObserverBusy = false;
         lastUpdated = System.currentTimeMillis();
         NO_MATCH_COUNT = 0;
-        if (isRecognitionNotificationEnabled) {
-            showNotification(observed.Song, observed.Artist);
-        }
         for (AmbientIndicationManagerCallback cb : mCallbacks) {
             try {
                 cb.onRecognitionResult(observed);
@@ -308,31 +284,4 @@ public class AmbientIndicationManager {
         }
     }
 
-    private void showNotification(String song, String artist) {
-        Notification.Builder mBuilder =
-                new Notification.Builder(mContext, "music_recognized_channel");
-        final Bundle extras = Bundle.forPair(Notification.EXTRA_SUBSTITUTE_APP_NAME,
-                mContext.getResources().getString(com.android.internal.R.string.ambient_recognition_notification));
-        mBuilder.setSmallIcon(R.drawable.ic_music_note_24dp);
-        mBuilder.setContentText(String.format(mContext.getResources().getString(
-                com.android.internal.R.string.ambient_recognition_information), song, artist));
-        mBuilder.setColor(mContext.getResources().getColor(com.android.internal.R.color.system_notification_accent_color));
-        mBuilder.setAutoCancel(false);
-        mBuilder.setVisibility(Notification.VISIBILITY_PUBLIC);
-        mBuilder.setLocalOnly(true);
-        mBuilder.setShowWhen(true);
-        mBuilder.setWhen(System.currentTimeMillis());
-        mBuilder.setTicker(String.format(mContext.getResources().getString(
-                com.android.internal.R.string.ambient_recognition_information), song, artist));
-        mBuilder.setExtras(extras);
-
-        NotificationManager mNotificationManager =
-                (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        NotificationChannel channel = new NotificationChannel("music_recognized_channel",
-                mContext.getResources().getString(com.android.internal.R.string.ambient_recognition_notification),
-                NotificationManager.IMPORTANCE_MIN);
-        mNotificationManager.createNotificationChannel(channel);
-        mNotificationManager.notify(122306791, mBuilder.build());
-    }
 }

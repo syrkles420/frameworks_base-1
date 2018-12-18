@@ -14,7 +14,7 @@
  * if not, see <http://www.gnu.org/licenses>.
  */
 
-package com.android.systemui.ambient.play;
+package com.android.systemui.ambientmusic;
 
 public interface AmbientIndicationManagerCallback {
 
