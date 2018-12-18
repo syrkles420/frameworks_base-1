@@ -21,6 +21,8 @@ import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import android.os.Handler;
+import android.os.Message;
 import android.os.Process;
 import android.provider.Settings;
 import android.util.Log;
@@ -58,8 +60,26 @@ public class RecognitionObserver implements AmbientIndicationManagerCallback {
     private AmbientIndicationManager mManager;
     private boolean isRecognitionEnabled;
 
+    private Handler mHandler;
+    private static final int MSG_ERROR = 1;
+    private static final int MSG_RESULT = 2;
+    private static final int MSG_NO_RESULT = 3;
+
     RecognitionObserver(Context context, AmbientIndicationManager manager) {
         this.mManager = manager;
+
+        mHandler = new Handler() {
+            public void handleMessage(Message msg) {
+                if (msg.what == MSG_ERROR) {
+                    mManager.dispatchRecognitionError();
+                } else if (msg.what == MSG_NO_RESULT) {
+                    mManager.dispatchRecognitionNoResult();
+                } else if (msg.what == MSG_RESULT) {
+                    mManager.dispatchRecognitionResult((Observable) msg.obj);
+                }
+            }
+        };
+
         manager.registerCallback(this);
     }
 
@@ -85,7 +105,8 @@ public class RecognitionObserver implements AmbientIndicationManagerCallback {
             if (!isRecognitionEnabled){
                 if (mManager.DEBUG) Log.d(TAG, "Recognition disabled, stopping all and triggering dispatchRecognitionNoResult");
                 stopRecording();
-                mManager.dispatchRecognitionNoResult();
+                Message msg = Message.obtain(mHandler, MSG_NO_RESULT);
+                mHandler.sendMessage(msg);
             }
         }
     }
@@ -244,11 +265,13 @@ public class RecognitionObserver implements AmbientIndicationManagerCallback {
             // report the result.
             if (!isRecognitionEnabled || isNullResult(observed)) {
                 if (mManager.DEBUG) Log.d(TAG, "Reporting onNoMatch");
-                mManager.dispatchRecognitionNoResult();
+                Message msg = Message.obtain(mHandler, MSG_NO_RESULT);
+                mHandler.sendMessage(msg);
             } else {
                 if (mManager.DEBUG) Log.d(TAG, "Reporting result");
                 mResultGiven = true;
-                mManager.dispatchRecognitionResult(observed);
+                Message msg = Message.obtain(mHandler, MSG_RESULT, observed);
+                mHandler.sendMessage(msg);
             }
         }
     }
@@ -274,11 +297,13 @@ public class RecognitionObserver implements AmbientIndicationManagerCallback {
                             mRecThread.start();
                         } catch (Exception e) {
                             if (mManager.DEBUG) Log.d(TAG, "Cannot start recording for recognition", e);
-                            mManager.dispatchRecognitionError();
+                                Message msg = Message.obtain(mHandler, MSG_ERROR);
+                                mHandler.sendMessage(msg);
                         }
                         Thread.currentThread().sleep(mManager.getRecordingMaxTime());
                     } catch (Exception e2) {
-                        mManager.dispatchRecognitionError();
+                        Message msg = Message.obtain(mHandler, MSG_ERROR);
+                        mHandler.sendMessage(msg);
                     }
                     // Stop recording, process audio and post result.
                     stopRecording();
@@ -287,7 +312,8 @@ public class RecognitionObserver implements AmbientIndicationManagerCallback {
         }else{
             if (mManager.DEBUG) Log.d(TAG, "No connectivity, triggering dispatchRecognitionError");
             stopRecording();
-            mManager.dispatchRecognitionError();
+            Message msg = Message.obtain(mHandler, MSG_ERROR);
+            mHandler.sendMessage(msg);
         }
     }
 
